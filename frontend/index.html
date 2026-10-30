@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" data-t="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MediSense AI – Intelligent Medical Inventory Management</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<aside>
+  <div class="logo"><i></i>MediSense AI</div>
+  <nav id="nav"></nav>
+  <div class="side-note">Forecasting, constraint-based ordering, risk prediction and expiry planning for your pharmacy stock.</div>
+</aside>
+<div class="wrap">
+  <header>
+    <h2 id="title">Dashboard</h2>
+    <button class="btn" id="bell">Alerts<b>0</b></button>
+    <button class="btn" id="theme">Dark mode</button>
+  </header>
+  <div class="mnav" id="mnav"></div>
+  <main id="main"></main>
+</div>
+
+<dialog id="dlg">
+  <h3 style="margin-bottom:6px">Add medicine</h3>
+  <form id="frm">
+    <label>Name</label><input name="name" required placeholder="e.g. Dolo 650mg">
+    <label>Category</label><select name="category"><option>Analgesic</option><option>Antibiotic</option><option>Antidiabetic</option><option>Cardiac</option><option>Antihistamine</option><option>Respiratory</option><option>Antacid</option><option>Supplement</option><option>Antidote</option><option>Vaccine</option></select>
+    <label>Criticality</label><select name="criticality"><option value="vital">Vital (life-saving)</option><option value="essential" selected>Essential</option><option value="desirable">Desirable</option></select>
+    <label>Quantity in stock</label><input name="stock" type="number" min="0" required value="100">
+    <label>Price per unit (₹)</label><input name="unit_price" type="number" min="0" step="0.1" required value="2">
+    <label>Days until expiry</label><input name="expiry_days" type="number" min="1" required value="180">
+    <label>Average daily sales</label><input name="avg_daily_sales" type="number" min="0.1" step="0.1" required value="10">
+    <label>Shelf space per unit</label><input name="storage_units" type="number" min="0.1" step="0.1" required value="1">
+    <label>Supplier</label><select name="supplier_id" id="usel"></select>
+    <div class="row" style="margin-top:18px"><button type="button" class="btn" onclick="dlg.close()">Cancel</button><button class="btn p">Add medicine</button></div>
+  </form>
+</dialog>
+<dialog id="sell">
+  <h3 style="margin-bottom:6px">Record sale</h3>
+  <form id="sfrm">
+    <label>Medicine</label><select name="medicine_id" id="ssel"></select>
+    <label>Quantity sold</label><input name="quantity" type="number" min="1" required value="1">
+    <div class="row" style="margin-top:18px"><button type="button" class="btn" onclick="$('#sell').close()">Cancel</button><button class="btn p">Record sale</button></div>
+  </form>
+</dialog>
+<input type="file" id="csvf" accept=".csv" hidden>
+<dialog id="sub"></dialog>
+<div id="toast"></div>
+
+<script src="js/utils.js"></script>
+<script src="js/api.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/views/dashboard.js"></script>
+<script src="js/views/alerts.js"></script>
+<script src="js/views/inventory.js"></script>
+<script src="js/views/forecast.js"></script>
+<script src="js/views/planner.js"></script>
+<script src="js/views/expiry.js"></script>
+<script src="js/views/suppliers.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
